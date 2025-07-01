@@ -21,13 +21,15 @@ contract ToDoList {
     // Modifiers
 
     // Events
-    event ShowTask (Task[]);
+    event AddTask (Task);
+    event ChangeStateTask (Task);
 
     // External functions
     function createTask(string memory title_, string memory description_) public {
         id += 1;
         Task memory task1 = Task( id, title_, description_, false );
         tasks.push(task1);
+        emit AddTask(task1);
     }
 
     function showTasks() public view returns(Task[] memory){
@@ -40,7 +42,6 @@ contract ToDoList {
                 tasks[i].title = title_;
             }
         }
-        emit ShowTask(tasks);
     }
 
     function changeDescriptionOfTask(uint16 id_, string memory description_) public {
@@ -49,16 +50,15 @@ contract ToDoList {
                 tasks[i].description = description_;
             }
         }
-        emit ShowTask(tasks);
     }
 
     function changeStateOfTask(uint16 id_) public {
         for(uint16 i = 0; i < tasks.length; i++){
             if(id_ == tasks[i].id){
                 tasks[i].completed = !tasks[i].completed;
+                emit ChangeStateTask(tasks[i]);
             }
         }
-        emit ShowTask(tasks);
     }
 
     // Internal functions
