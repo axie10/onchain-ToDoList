@@ -33,8 +33,28 @@ contract ToDoList {
         return tasks;
     }
 
-    function changeStateofTask() public {
+    function changeTitleOfTask(uint16 id_, string memory title_) public {
+        for(uint16 i = 0; i < tasks.length; i++){
+            if(id_ == tasks[i].id){
+                tasks[i].title = title_;
+            }
+        }
+    }
 
+    function changeDescriptionOfTask(uint16 id_, string memory description_) public {
+        for(uint16 i = 0; i < tasks.length; i++){
+            if(id_ == tasks[i].id){
+                tasks[i].description = description_;
+            }
+        }
+    }
+
+    function changeStateOfTask(uint16 id_) public {
+        for(uint16 i = 0; i < tasks.length; i++){
+            if(id_ == tasks[i].id){
+                tasks[i].completed = !tasks[i].completed;
+            }
+        }
     }
 
     // Internal functions
