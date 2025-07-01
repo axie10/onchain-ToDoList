@@ -8,6 +8,7 @@ contract ToDoList {
 
 
     struct Task {
+        uint16 id;
         string title;
         string description;
         bool completed;
@@ -15,6 +16,7 @@ contract ToDoList {
 
     // Variables
     Task[] public tasks;
+    uint16 id;
 
     // Modifiers
 
@@ -22,12 +24,17 @@ contract ToDoList {
 
     // External functions
     function createTask(string memory title_, string memory description_) public {
-        Task memory task1 = Task( title_, description_, false );
+        id += 1;
+        Task memory task1 = Task( id, title_, description_, false );
         tasks.push(task1);
     }
 
     function showTasks() public view returns(Task[] memory){
         return tasks;
+    }
+
+    function changeStateofTask() public {
+
     }
 
     // Internal functions
